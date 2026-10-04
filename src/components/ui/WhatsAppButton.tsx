@@ -1,13 +1,14 @@
 import { MessageCircle } from "lucide-react";
 import { buildWhatsAppUrl } from "../../lib/utils";
 import { Button } from "./Button";
+import type { ButtonSize, ButtonVariant } from "./Button";
 
 interface WhatsAppButtonProps {
   phone: string;
   message: string;
   label: string;
-  variant?: "primary" | "outline" | "ghost" | "link";
-  size?: "md" | "sm";
+  variant?: ButtonVariant;
+  size?: ButtonSize;
   className?: string;
 }
 

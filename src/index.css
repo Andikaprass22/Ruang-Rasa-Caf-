@@ -50,6 +50,15 @@
   }
 }
 
+@keyframes heroSettle {
+  from {
+    transform: scale(1.06);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
 /* Longhand so utility animation-delay classes are not reset by the shorthand. */
 .rise {
   animation-name: riseIn;
@@ -65,13 +74,21 @@
   animation-fill-mode: both;
 }
 
+.hero-img {
+  animation-name: heroSettle;
+  animation-duration: 1800ms;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-fill-mode: both;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
 
   .rise,
-  .panel-in {
+  .panel-in,
+  .hero-img {
     animation: none;
   }
 

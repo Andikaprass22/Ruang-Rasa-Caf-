@@ -20,6 +20,10 @@ export interface RestaurantInfo {
   tagline: string;
   intro: string;
   logoText: string;
+  heroImage: {
+    landscape: string;
+    portrait: string;
+  };
   story: {
     title: string;
     paragraphs: string[];

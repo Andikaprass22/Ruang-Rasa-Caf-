@@ -19,6 +19,14 @@ export const restaurant: RestaurantInfo = {
   intro:
     "Kami memasak dengan bumbu yang ditumbuk harian dan memanggang kopi dalam batch kecil. Tempatnya sederhana, cocok untuk makan siang, bekerja sebentar, atau bertemu teman.",
   logoText: "Ruang Rasa",
+  // Foto suasana kafe untuk hero. Sumber: Pexels (lisensi bebas pakai, tanpa atribusi).
+  // GANTI dengan foto klien di public/images/ bila sudah tersedia.
+  heroImage: {
+    landscape:
+      "https://images.pexels.com/photos/29692583/pexels-photo-29692583.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=2400&h=1350",
+    portrait:
+      "https://images.pexels.com/photos/29692583/pexels-photo-29692583.jpeg?auto=compress&cs=tinysrgb&w=1200",
+  },
   story: {
     title: "Berawal dari dapur keluarga",
     paragraphs: [
