@@ -23,17 +23,17 @@ Membangun **landing page profesional untuk restoran/kafe** yang berfungsi ganda 
 
 **Keputusan lingkup yang disepakati dengan pemilik proyek:**
 
-- Fokus pada **landing page saja** (SPA statis). Backend/database **ditunda**.
-- Meski begitu, arsitektur disiapkan **siap-DB**: semua komponen membaca data **hanya** lewat `src/lib/data.ts`, sehingga migrasi ke DB + full CRUD di masa depan hanya mengubah file itu, tanpa menyentuh komponen.
+- **Frontend saja.** Ini murni landing page statis (SPA) tanpa backend — tidak ada database, API, autentikasi, maupun operasi CRUD dalam scope.
+- Seluruh konten (nama bisnis, menu, harga, promo, foto, lokasi, kontak) terpusat di `src/lib/data.ts` sehingga bisa diganti dengan mengedit satu file.
 
-### 1.1 Yang secara eksplisit BUKAN bagian dari spec ini (YAGNI)
+### 1.1 Yang secara eksplisit BUKAN bagian dari spec ini
 
 - Database (Supabase/Postgres/Firebase/SQLite), API server, autentikasi.
 - Panel admin / operasi Create-Read-Update-Delete.
 - CMS, multi-bahasa, keranjang belanja, pembayaran online.
 - Backend reservasi (form reservasi hanya meneruskan pesan ke WhatsApp).
 
-Alasan: pemilik memilih "landing page saja". Struktur data tetap disiapkan agar penambahan DB nanti murah.
+Alasan: pemilik hanya menginginkan frontend. Perubahan konten dilakukan dengan mengedit `src/lib/data.ts`.
 
 ---
 
@@ -104,7 +104,7 @@ ruang-rasa-cafe/
 ### 3.1 Batas tanggung jawab modul
 
 - `lib/types.ts` — kontrak data. Tanpa logika. Diekspor untuk dipakai `data.ts` dan komponen.
-- `lib/data.ts` — objek/array data demo bertipe. **Nanti di titik inilah penggantian ke `fetch()`/DB terjadi** (mis. ubah `export const menuItems` menjadi fungsi `getMenuItems()`). Komponen saat ini mengimpor langsung; migrasi nanti akan mengubah cara impor — dicatat sebagai risiko di §8.
+- `lib/data.ts` — objek/array data demo bertipe. Satu-satunya sumber konten situs; mengedit file ini mengganti isi seluruh halaman tanpa menyentuh komponen.
 - `lib/utils.ts` — fungsi murni yang mudah diuji: format mata uang, pembuat URL WhatsApp, pengecekan promo aktif, penggabungan kelas.
 - Komponen section — hanya presentasi + state UI lokal.
 
@@ -245,8 +245,7 @@ Semua tombol memakai `rel="noopener noreferrer"` dan `target="_blank"`.
 
 ## 8. Risiko & Catatan
 
-- **Migrasi ke DB di masa depan:** komponen saat ini mengimpor `menuItems` dkk. secara langsung. Bila nanti data jadi dinamis (async), impor langsung harus diganti menjadi pemuatan async + state/hook. Karena semua akses sudah terpusat di `lib/data.ts`, perubahan terbatas pada file itu + sedikit penyesuaian di section yang merender daftar. Ini disengaja dan dicatat agar keputusan sadar.
-- **Gambar:** tanpa aset nyata, gunakan gambar placeholder berkualitas (mis. dari `public/images` yang disiapkan, atau sumber stok). Ukuran/format harus wajar agar build ringan.
+- **Gambar:** untuk demo, gunakan URL gambar stok tetap (lihat §5.2). Ukuran/format harus wajar agar halaman tetap ringan; klien menggantinya dengan foto sendiri di `public/images/`.
 - **Peta:** `mapsEmbedUrl` menggunakan embed generik (Google Maps) tanpa API key; dipastikan tidak butuh key.
 - **Tidak ada klaim tanpa dasar** — ini aturan konten wajib, bukan opsional.
 
